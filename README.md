@@ -4,6 +4,9 @@
 
 ### 内部户 Internal Account
 
+* 创建内部户
+* 冻结内部户
+* 解冻内部户
 
 ### 内部户控制 Internal Account Control
 
@@ -13,5 +16,3 @@
 * application - 业务动作编排
 * domain - 领域模型与业务逻辑
 * infrastructure - 基础设施（技术实现）
-
-![分层架构](\layer_arch_gyb.jpg)
