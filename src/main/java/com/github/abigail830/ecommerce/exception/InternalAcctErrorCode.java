@@ -1,7 +1,5 @@
-package com.github.abigail830.ecommerce.internal_acct.domain.exception;
+package com.github.abigail830.ecommerce.exception;
 
-
-import com.github.abigail830.ecommerce.exception.ErrorCode;
 
 public enum InternalAcctErrorCode implements ErrorCode {
 

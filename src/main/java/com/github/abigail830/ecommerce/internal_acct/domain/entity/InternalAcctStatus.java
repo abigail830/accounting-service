@@ -1,4 +1,4 @@
-package com.github.abigail830.ecommerce.internal_acct.domain.model;
+package com.github.abigail830.ecommerce.internal_acct.domain.entity;
 
 public enum InternalAcctStatus {
     CREATED,

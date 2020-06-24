@@ -1,8 +1,8 @@
-package com.github.abigail830.ecommerce.internal_acct.domain.model;
+package com.github.abigail830.ecommerce.internal_acct.domain.entity;
 
 
-import com.github.abigail830.ecommerce.internal_acct.domain.exception.InternalAcctCouldNotBeUnFreezeException;
 import com.github.abigail830.ecommerce.internal_acct.domain.exception.InternalAcctCouldNotBeFreezeException;
+import com.github.abigail830.ecommerce.internal_acct.domain.exception.InternalAcctCouldNotBeUnFreezeException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import static java.time.Instant.now;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class InternalAcct {
+public class InternalAcctAggRoot {
 
     private String id;
     private String ccy;
@@ -25,8 +25,8 @@ public class InternalAcct {
     private InternalAcctStatus status;
     private Instant lastUpdateAt;
 
-    public InternalAcct(String id, String ccy, BigDecimal balance,
-                        InternalAcctStatus status, Instant lastUpdateAt) {
+    public InternalAcctAggRoot(String id, String ccy, BigDecimal balance,
+                               InternalAcctStatus status, Instant lastUpdateAt) {
         this.id = id;
         this.ccy = ccy;
         this.balance = balance;
@@ -34,17 +34,18 @@ public class InternalAcct {
         this.lastUpdateAt = lastUpdateAt;
     }
 
-    public static InternalAcct create(String id, String ccy, BigDecimal balance) {
-        return new InternalAcct(id, ccy, balance, InternalAcctStatus.CREATED,  now());
+    public static InternalAcctAggRoot create(String id, String ccy, BigDecimal balance) {
+        return new InternalAcctAggRoot(id,
+                ccy, balance, InternalAcctStatus.CREATED, now());
     }
 
-    public static InternalAcct restore(String id, String ccy, BigDecimal balance, String status, Timestamp lastUpdateAt) {
-        return new InternalAcct(id, ccy, balance, InternalAcctStatus.valueOf(status),  lastUpdateAt.toInstant());
+    public static InternalAcctAggRoot restore(String id, String ccy, BigDecimal balance, String status, Timestamp lastUpdateAt) {
+        return new InternalAcctAggRoot(id, ccy, balance, InternalAcctStatus.valueOf(status), lastUpdateAt.toInstant());
     }
 
 
     public void freeze(String id) {
-        if(this.status != InternalAcctStatus.CREATED && this.status != InternalAcctStatus.ENABLE){
+        if (this.status != InternalAcctStatus.CREATED && this.status != InternalAcctStatus.ENABLE) {
             throw new InternalAcctCouldNotBeFreezeException(id);
         }
         this.status = InternalAcctStatus.FREEZEN;

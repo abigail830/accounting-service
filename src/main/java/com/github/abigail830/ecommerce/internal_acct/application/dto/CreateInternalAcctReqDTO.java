@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Value
-public class CreateInternalAcctRequest {
+public class CreateInternalAcctReqDTO {
 
     @Valid
     @NotEmpty(message = "币种不能为空")
